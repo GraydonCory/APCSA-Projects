@@ -110,8 +110,25 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public char mostFrequentLetter() {
-        // TODO Auto-generated method stub
-        return 0;
+        String message = fileAsString;
+        LinkedHashMap<Character, Integer> letterCounts = new LinkedHashMap<>();
+        letterCounts.put(' ',0);
+        for(int i = 0; i<message.length();i++){
+            if(letterCounts.get(Character.toLowerCase(message.charAt(i))) == null) {
+                letterCounts.put(Character.toLowerCase(message.charAt(i)),1);
+            }
+            else if(message.charAt(i) != ' '){
+                letterCounts.put(Character.toLowerCase(message.charAt(i)),letterCounts.get(Character.toLowerCase(message.charAt(i)))+1);
+                
+            }
+        }
+        char output = ' ';
+        for(char letter : letterCounts.keySet()){
+            if(letterCounts.get(letter)>letterCounts.get(output)){
+            output=letter;
+            }
+        }
+        return output;
     }
     
     @Override

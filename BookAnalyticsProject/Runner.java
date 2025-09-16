@@ -10,5 +10,7 @@ class Runner {
         System.out.print("most frequent word starting with capital: ");
         System.out.println(analytics.mostFrequentWordWithCapitalFirstLetter());
         
+        System.out.print("most frequent letter: ");
+        System.out.println(analytics.mostFrequentLetter() );
     }
 }
