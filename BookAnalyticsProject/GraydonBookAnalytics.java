@@ -133,8 +133,22 @@ public class GraydonBookAnalytics extends BookAnalytics{
     
     @Override
     public int wordCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        String message = fileAsString;
+        char[] invalid = {'.',',','?','!','"','\'','\\','/','”',';','\t','\n','˜'};
+  
+        for(char c : invalid){
+                message = message.replace(""+c, "");
+        }
+        String[] messageWords=message.split(" ");
+        
+        int count=0;
+        for(int i = 0; i<messageWords.length;i++){
+            if(messageWords[i].strip()!="" ){
+                count+=1;
+            }
+        }
+        
+        return count;
     }
 
     @Override

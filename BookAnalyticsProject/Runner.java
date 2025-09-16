@@ -12,5 +12,8 @@ class Runner {
         
         System.out.print("most frequent letter: ");
         System.out.println(analytics.mostFrequentLetter() );
+
+        System.out.print("word count: ");
+        System.out.println(analytics.wordCount());
     }
 }
