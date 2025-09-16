@@ -2,8 +2,11 @@ package BookAnalyticsProject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.LinkedHashMap;
 
@@ -13,10 +16,17 @@ public class GraydonBookAnalytics extends BookAnalytics{
     protected File file;
 	protected Scanner scan;
 	protected PrintWriter write; 
+    protected String fileAsString;
     
     public GraydonBookAnalytics(String aTextFile, String outputFile){
         super(aTextFile, outputFile);
         file = new File(aTextFile);
+        try {
+            fileAsString = Files.readString(Path.of(aTextFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 		try {
 			scan = new Scanner(file);
 			write = new PrintWriter(outputFile, "UTF-8");
@@ -27,11 +37,7 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String mostFrequentWord() {
-        String message = "";
-        while (scan.hasNextLine()) {
-            message += scan.nextLine()+ "\n";   
-        }
-
+        String message = fileAsString;
         char[] invalid = {'.',',','?','!','"','\'','\\','/','”',';','\t','\n','˜'};
   
         for(char c : invalid){
@@ -66,8 +72,40 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String mostFrequentWordWithCapitalFirstLetter() {
-        // TODO Auto-generated method stub
-        return null;
+        String message = fileAsString;
+
+        char[] invalid = {'.',',','?','!','"','\'','\\','/','”',';','\t','\n','˜'};
+  
+        for(char c : invalid){
+                message = message.replace(""+c, " ");
+        }
+        String[] messageWords=message.split(" ");
+
+        LinkedHashMap<String, Integer> wordCounts = new LinkedHashMap<>();
+        wordCounts.put("",0);
+        
+        for(int i = 0; i<messageWords.length;i++){
+            if(messageWords[i]!="" && Character.isUpperCase(messageWords[i].charAt(0))){
+                
+                if(wordCounts.get(messageWords[i]) == null) {
+                    wordCounts.put(messageWords[i],0);
+                }
+                wordCounts.put(messageWords[i],wordCounts.get(messageWords[i]) + 1);
+            }
+        }
+
+        wordCounts.put("",0);
+        wordCounts.put(" ",0);
+
+        String output = "";
+        for(String word : wordCounts.keySet()){
+            
+            if(wordCounts.get(word) > wordCounts.get(output)){
+            output=word;
+            
+            }
+        }
+        return output;
     }
 
     @Override
