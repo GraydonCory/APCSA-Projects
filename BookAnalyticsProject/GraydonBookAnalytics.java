@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
+import java.util.LinkedHashMap;
 
 
 public class GraydonBookAnalytics extends BookAnalytics{
@@ -26,8 +27,41 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String mostFrequentWord() {
-        // TODO Auto-generated method stub
-        return null;
+        String message = "";
+        while (scan.hasNextLine()) {
+            message += scan.nextLine()+ "\n";   
+        }
+
+        char[] invalid = {'.',',','?','!','"','\'','\\','/','”',';','\t','\n','˜'};
+  
+        for(char c : invalid){
+                message = message.replace(""+c, " ");
+        }
+        String[] messageWords=message.split(" ");
+
+        LinkedHashMap<String, Integer> wordCounts = new LinkedHashMap<>();
+        wordCounts.put("",0);
+        wordCounts.put(" ",0);
+        
+        for(int i = 0; i<messageWords.length;i++){
+            if(wordCounts.get(messageWords[i].toLowerCase()) == null) {
+                wordCounts.put(messageWords[i].toLowerCase(),0);
+                
+            }
+                wordCounts.put(messageWords[i].toLowerCase(),wordCounts.get(messageWords[i].toLowerCase()) + 1);
+        }
+
+        wordCounts.put("",0);
+        wordCounts.put(" ",0);
+
+        String output = "";
+        for(String word : wordCounts.keySet()){
+            if(wordCounts.get(word) > wordCounts.get(output)){
+            output=word;
+            
+            }
+        }
+        return output;
     }
 
     @Override
