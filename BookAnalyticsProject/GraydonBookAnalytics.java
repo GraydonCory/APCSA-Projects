@@ -1,4 +1,29 @@
+package BookAnalyticsProject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Scanner;
+
+
 public class GraydonBookAnalytics extends BookAnalytics{
+
+    protected File file;
+	protected Scanner scan;
+	protected PrintWriter write; 
+    
+    public GraydonBookAnalytics(String aTextFile, String outputFile){
+        super(aTextFile, outputFile);
+        file = new File(aTextFile);
+		try {
+			scan = new Scanner(file);
+			write = new PrintWriter(outputFile, "UTF-8");
+		} catch (UnsupportedEncodingException | FileNotFoundException e) {
+			e.printStackTrace();
+		}  
+    }
+
     @Override
     public String mostFrequentWord() {
         // TODO Auto-generated method stub
