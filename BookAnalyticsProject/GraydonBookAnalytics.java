@@ -37,7 +37,7 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String mostFrequentWord() {
-        String message = fileAsString;
+        String message = fileAsString.toLowerCase();
         char[] invalid = {'.',',','?','!','"','\'','\\','/','”',';','\t','\n','˜'};
   
         for(char c : invalid){
@@ -50,11 +50,11 @@ public class GraydonBookAnalytics extends BookAnalytics{
         wordCounts.put(" ",0);
         
         for(int i = 0; i<messageWords.length;i++){
-            if(wordCounts.get(messageWords[i].toLowerCase()) == null) {
-                wordCounts.put(messageWords[i].toLowerCase(),0);
+            if(wordCounts.get(messageWords[i]) == null) {
+                wordCounts.put(messageWords[i],0);
                 
             }
-                wordCounts.put(messageWords[i].toLowerCase(),wordCounts.get(messageWords[i].toLowerCase()) + 1);
+                wordCounts.put(messageWords[i],wordCounts.get(messageWords[i]) + 1);
         }
 
         wordCounts.put("",0);
@@ -191,26 +191,59 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public double averageWordLength() {
-        // TODO Auto-generated method stub
-        return 0;
+        return (this.vowelCount()+this.consonantCount()+0.0)/this.wordCount();
     }
 
     @Override
     public int sentenceCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        String message = fileAsString.toLowerCase();
+        String[] remove = {"...","mr.","mrs.","ms.","dr.","jr.","sr."};
+        char[] sentenceEnds = {'!','?','.'};
+        int count = 0;
+        for(String s : remove){
+                message = message.replace(s, " ");
+        }
+
+        
+        char[] messageCharacters=message.toCharArray();
+        for(char c : messageCharacters){
+            for(char punc : sentenceEnds){
+                if(c==punc){
+                    count+=1;
+                }
+            }
+        }
+        return count;
     }
 
     @Override
     public double averageWordsPerSentance() {
-        // TODO Auto-generated method stub
-        return 0;
+        return (wordCount()+0.0)/sentenceCount();
     }
 
     @Override
     public int numberOfDifferentWords() {
-        // TODO Auto-generated method stub
-        return 0;
+                String message = fileAsString.toLowerCase();
+        char[] invalid = {'.',',','?','!','"','\'','\\','/','”',';','\t','\n','˜'};
+  
+        for(char c : invalid){
+                message = message.replace(""+c, " ");
+        }
+        String[] messageWords=message.split(" ");
+
+        LinkedHashMap<String, Integer> wordCounts = new LinkedHashMap<>();
+        wordCounts.put("",0);
+        wordCounts.put(" ",0);
+        
+        for(int i = 0; i<messageWords.length;i++){
+            if(wordCounts.get(messageWords[i]) == null) {
+                wordCounts.put(messageWords[i],0);
+                
+            }
+                wordCounts.put(messageWords[i],wordCounts.get(messageWords[i]) + 1);
+        }
+
+        return wordCounts.keySet().size()-2;
     }
 
     @Override

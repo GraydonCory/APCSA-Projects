@@ -3,7 +3,7 @@ package BookAnalyticsProject;
 class Runner {
 
     public static void main(String[] args) {
-        GraydonBookAnalytics analytics = new GraydonBookAnalytics("BookAnalyticsProject/TheRaven.txt","output.txt");
+        GraydonBookAnalytics analytics = new GraydonBookAnalytics("BookAnalyticsProject/TheRaven.txt","BookAnalyticsProject/output.txt");
         System.out.print("most frequent word: ");
         System.out.println(analytics.mostFrequentWord());
         
@@ -24,5 +24,20 @@ class Runner {
 
         System.out.print("consonant count: ");
         System.out.println(analytics.consonantCount());
+
+        System.out.print("average word length: ");
+        System.out.println(analytics.averageWordLength());
+
+        System.out.print("sentance count: ");
+        System.out.println(analytics.sentenceCount());
+
+        System.out.print("average words per sentance: ");
+        System.out.println(analytics.averageWordsPerSentance());
+
+        System.out.print("unique word count: ");
+        System.out.println(analytics.numberOfDifferentWords());
+        
+
+        
     }
 }
