@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.LinkedHashMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 
@@ -268,8 +267,23 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String alphabetizeAllByWord() {
-        // TODO Auto-generated method stub
-        return null;
+        String message = fileAsString.toLowerCase();
+        char[] invalid = {'.',',','?','!','"','\'','\\','/','”',';','\t','\n','˜'};
+        String output = "";
+        for(char c : invalid){
+                message = message.replace(""+c, " ");
+        }
+        ArrayList<String> messageWords = new ArrayList<String>();
+        for(String word: message.split(" ")){
+            messageWords.add(word.strip());
+        }
+        Collections.sort(messageWords);
+
+        for(String s : messageWords){
+            output+=s;
+        }
+
+        return output;
     }
 
     @Override

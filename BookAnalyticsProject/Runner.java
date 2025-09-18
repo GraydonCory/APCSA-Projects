@@ -37,10 +37,11 @@ class Runner {
         System.out.print("unique word count: ");
         System.out.println(analytics.numberOfDifferentWords());
 
-        System.out.print("alphabatized: ");
-        System.out.println(analytics.alphabetizeAllByChar());
+        // System.out.print("alphabatized by letter: ");
+        // System.out.println(analytics.alphabetizeAllByChar());
 
-        
+        System.out.print("alphabatized by word: ");
+        System.out.println(analytics.alphabetizeAllByWord());
 
         
     }
