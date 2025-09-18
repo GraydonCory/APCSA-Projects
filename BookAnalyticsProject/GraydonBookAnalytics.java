@@ -153,20 +153,40 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public int characterCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        String message = fileAsString;
+        message.replaceAll("\n","");
+        return message.length();
+
     }
 
     @Override
     public int vowelCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        String message = fileAsString.toLowerCase();
+        char[] vowels = {'a','e','i','o','u','y'};
+        int count = 0;
+        for(int i=0;i<message.length();i++){
+            for(char vowel : vowels){
+                if(message.charAt(i) == vowel){
+                    count+=1;
+                }
+            }
+        }
+        return count;
     }
 
     @Override
     public int consonantCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        String message = fileAsString.toLowerCase();
+        char[] consonants = {'b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z'};
+        int count = 0;
+        for(int i=0;i<message.length();i++){
+            for(char consonant : consonants){
+                if(message.charAt(i) == consonant){
+                    count+=1;
+                }
+            }
+        }
+        return count;
     }
 
     @Override

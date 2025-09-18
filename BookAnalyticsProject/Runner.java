@@ -15,5 +15,14 @@ class Runner {
 
         System.out.print("word count: ");
         System.out.println(analytics.wordCount());
+
+        System.out.print("character count: ");
+        System.out.println(analytics.characterCount());
+
+        System.out.print("vowel count: ");
+        System.out.println(analytics.vowelCount());
+
+        System.out.print("consonant count: ");
+        System.out.println(analytics.consonantCount());
     }
 }
