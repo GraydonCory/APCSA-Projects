@@ -9,6 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 
 public class GraydonBookAnalytics extends BookAnalytics{
@@ -248,8 +251,19 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String alphabetizeAllByChar() {
-        // TODO Auto-generated method stub
-        return null;
+        char[] messageChars = fileAsString.toCharArray();
+        ArrayList<Character> messageCharList = new ArrayList<Character>();
+        String output ="";
+        for(char c : messageChars){
+            messageCharList.add(c);
+        }
+        Collections.sort(messageCharList);
+        
+        for(char c : messageCharList){
+            output+=c;
+        }
+
+        return output;
     }
 
     @Override
