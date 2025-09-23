@@ -12,6 +12,9 @@ class Runner {
         // System.out.println(analytics.alphabetizeAllByWord());
 
         //System.out.println(analytics.replaceWordAndPreserveCase("the banAna was a fat bANana","banana","cat"));
+        String[] words = {" I ","Door"};
+        String[] replacements = {" you ", "cabinet"};
+        analytics.replaceWordsAndWriteToFile(words,replacements);
 
         
     }

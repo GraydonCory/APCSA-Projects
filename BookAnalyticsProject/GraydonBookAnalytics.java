@@ -336,8 +336,12 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public void replaceWordsAndWriteToFile(String[] wordsToBeReplaced, String[] wordsToReplaceWith) {
-        // TODO Auto-generated method stub
-        
+        String message = fileAsString;
+        for(int i = 0;i<wordsToBeReplaced.length && i<wordsToReplaceWith.length;i++){
+            message = replaceWordAndPreserveCase(message, wordsToBeReplaced[i], wordsToReplaceWith[i]);
+        }
+        write.write(message);
+        write.close();
     }
     
 }
