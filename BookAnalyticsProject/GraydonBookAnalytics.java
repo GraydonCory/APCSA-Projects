@@ -311,6 +311,7 @@ public class GraydonBookAnalytics extends BookAnalytics{
                 output+=wordTwo.toLowerCase().substring(wordOne.length());
             }
         }
+        output+= message;
         //output += message.substring(sliceLocation+wordOne.length());
 
         return output;
