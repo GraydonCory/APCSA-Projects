@@ -288,8 +288,30 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String replaceWordAndPreserveCase(String aLine, String wordOne, String wordTwo) {
-        // TODO Auto-generated method stub
-        return null;
+        String message = aLine;
+        String output = "";
+        int sliceLocation = -wordOne.length();
+        char c = ' ';
+        while(message.toLowerCase().contains(wordOne.toLowerCase())){
+            sliceLocation = message.toLowerCase().indexOf(wordOne.toLowerCase());
+            output +=  message.substring(0,sliceLocation);
+            for(int i = 0; i<wordOne.length() && i<wordTwo.length();i++){
+                c = message.charAt(sliceLocation+i);
+                if(Character.isUpperCase(c)){
+                    output+= wordTwo.toUpperCase().charAt(i);
+                }
+                else{
+                    output+=wordTwo.toLowerCase().charAt(i);
+                }
+            }
+            message=message.substring(sliceLocation+wordOne.length());
+            if(wordOne.length()<wordTwo.length()){
+                output+=wordTwo.toLowerCase().substring(wordOne.length());
+            }
+        }
+        //output += message.substring(sliceLocation+wordOne.length());
+
+        return output;
     }
 
     @Override
