@@ -19,10 +19,12 @@ public class GraydonBookAnalytics extends BookAnalytics{
 	protected Scanner scan;
 	protected PrintWriter write; 
     protected String fileAsString;
+    protected String fileName;
     
     public GraydonBookAnalytics(String aTextFile, String outputFile){
         super(aTextFile, outputFile);
         file = new File(aTextFile);
+        fileName = aTextFile;
         try {
             fileAsString = Files.readString(Path.of(aTextFile));
         } catch (IOException e) {
@@ -316,8 +318,20 @@ public class GraydonBookAnalytics extends BookAnalytics{
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        String output = "";
+        output += "\t" + fileName
+        + "\nMost Frequent Word : " + mostFrequentWord()
+        + "\nMost Frequent Letter: " + mostFrequentLetter()
+        + "\nMost Likely Subject: " + mostFrequentWordWithCapitalFirstLetter()
+        + "\nWord Count: " + wordCount()
+        + "\nCharacter Count: " + characterCount()
+        + "\nVowel Count: " + vowelCount()
+        + "\nConsonant Count: " + consonantCount()
+        + "\nSentence Count: " + sentenceCount()
+        + "\nAverage Word Length: " + averageWordLength()
+        + "\nAverage Words Per Sentence: " + averageWordsPerSentance()
+        + "\nNumber of Different Words Used: " + numberOfDifferentWords();
+        return output;
     }
 
     @Override
